@@ -11,8 +11,17 @@ function NewTail() {
   }
 
   return (
-    <Box m={5} sx={{ display: "flex" }}>
-      <Button onClick={NewTailClickHandler}>+ New Tail</Button>
+    <Box
+      m={5}
+      sx={{
+        display: "flex",
+        justifyContent: "space-around",
+        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+      }}
+    >
+      <Button variant="outlined" onClick={NewTailClickHandler} fullWidth>
+        + New Tail
+      </Button>
     </Box>
   );
 }

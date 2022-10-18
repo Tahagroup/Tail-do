@@ -51,6 +51,8 @@ function ToDoCard(props) {
       <CardContent
         sx={{
           background: props.theme.cardHeader,
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <TextField
@@ -67,14 +69,21 @@ function ToDoCard(props) {
           <DeleteTwoToneIcon />
         </IconButton>
       </CardContent>
-
       <CardContent>
         <List
           dense
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >
           {props.card.TodosData.map((todo, index) => {
-            return <TodoItem todoData={todo} key={index} />;
+            return (
+              <TodoItem
+                todoData={todo}
+                tailID={props.tailID}
+                cardID={props.card.cardID}
+                key={index}
+                index={index + 1}
+              />
+            );
           })}
           <NewTodoItem cardID={props.card.cardID} tailID={props.tailID} />
         </List>

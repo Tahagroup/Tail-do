@@ -71,8 +71,7 @@ function TailOptions(props) {
             justifyContent: "space-between",
             // gap: "4px",
             alignItems: "center",
-            position: "auto",
-            color: "green",
+            mb: "25px",
           }}
         >
           <GithubPicker
@@ -90,32 +89,35 @@ function TailOptions(props) {
           </IconButton>
         </Box>
       )}
-      <IconButton onClick={() => editClickHandler(props.tailInfo.tailID)}>
-        {isEditingName ? <CheckCircleTwoToneIcon /> : <EditTwoToneIcon />}
-      </IconButton>
-      {/* <ChangeColorDialog
-        isEditingColor={isEditingColor}
-        handleColorDialogClose={handleColorDialogClose}
-      /> */}
-      {/* Tail name: */}
-      {!isEditingName && (
-        <Typography
-          sx={{
-            writingMode: "vertical-rl",
-            color: "gray",
-          }}
-        >
-          {props.tailInfo.tailName}
-        </Typography>
-      )}
-      {isEditingName && (
-        <TextField
-          defaultValue={props.tailInfo.tailName}
-          label={"Tail's New Name: "}
-          inputRef={inputRef}
-          type={"text"}
-        />
-      )}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: isEditingName ? "row-reverse" : "column",
+          alignItems: "center",
+        }}
+      >
+        <IconButton onClick={() => editClickHandler(props.tailInfo.tailID)}>
+          {isEditingName ? <CheckCircleTwoToneIcon /> : <EditTwoToneIcon />}
+        </IconButton>
+        {!isEditingName && (
+          <Typography
+            sx={{
+              writingMode: "vertical-rl",
+              color: "gray",
+            }}
+          >
+            {props.tailInfo.tailName}
+          </Typography>
+        )}
+        {isEditingName && (
+          <TextField
+            defaultValue={props.tailInfo.tailName}
+            label={"Tail's New Name: "}
+            inputRef={inputRef}
+            type={"text"}
+          />
+        )}
+      </Box>
     </Box>
   );
 }

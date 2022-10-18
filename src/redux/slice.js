@@ -6,101 +6,57 @@ const initialState = {
   tailsData: [
     {
       id: "1",
-      tailName: "First Tail",
-      theme: palette[0],
+      tailName: "Daily Tasks",
+      theme: palette[3],
       cardsData: [
         {
           cardID: "first",
-          cardName: "First Tail first card",
+          cardName: "Monday",
           TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: true },
+            { todoTitle: "Do the laundry", done: false, index: 1 },
+            { todoTitle: "Wash the dishes", done: false, index: 2 },
+            { todoTitle: "Mow the lawn", done: true, index: 3 },
           ],
         },
         {
-          cardID: "second",
-          cardName: "First Tail second card",
+          cardID: "first",
+          cardName: "Tuesday",
           TodosData: [
-            { todoTitle: "todo1", done: true },
-            { todoTitle: "todo2", done: false },
+            { todoTitle: "Go To Work", done: true, index: 1 },
+            { todoTitle: "Take a Shower", done: true, index: 2 },
+            { todoTitle: "Buy Groceries", done: false, index: 2 },
+            { todoTitle: "18:00 => Meet Friends", done: false, index: 3 },
           ],
         },
       ],
     },
     {
       id: "2",
-      theme: palette[1],
-      tailName: "second Tail",
+      theme: palette[4],
+      tailName: "Month Goals",
       cardsData: [
         {
           cardID: "ba",
-          cardName: "second Tail first card",
+          cardName: "January",
           TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: true },
-            { todoTitle: "todo3", done: false },
+            { todoTitle: "Learn TypeScript", done: false, index: 1 },
+            { todoTitle: "Improve ReactJS Skills", done: false, index: 2 },
+            { todoTitle: "Improve Family Life", done: true, index: 3 },
           ],
         },
       ],
     },
     {
       id: "3",
-      theme: palette[2],
-      tailName: "third Tail",
+      theme: palette[5],
+      tailName: "Postponed Works",
       cardsData: [
         {
           cardID: "bb",
-          cardName: "third Tail 1th card",
+          cardName: "Til End Of Month",
           TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: true },
-          ],
-        },
-        {
-          cardID: "bc",
-          cardName: "third Tail 2th card",
-          TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: false },
-          ],
-        },
-        {
-          cardID: "bd",
-          cardName: "third Tail 3th card",
-          TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: false },
-          ],
-        },
-        {
-          cardID: "be",
-          cardName: "third Tail 4th card",
-          TodosData: [
-            { todoTitle: "todo1", done: true },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: false },
-          ],
-        },
-        {
-          cardID: "bf",
-          cardName: "third Tail 5th card",
-          TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: false },
-          ],
-        },
-        {
-          cardID: "bg",
-          cardName: "third Tail 6th card",
-          TodosData: [
-            { todoTitle: "todo1", done: false },
-            { todoTitle: "todo2", done: false },
-            { todoTitle: "todo3", done: false },
+            { todoTitle: "Business Trip", done: false, index: 1 },
+            { todoTitle: "Buy A New PC", done: false, index: 2 },
           ],
         },
       ],
@@ -114,7 +70,7 @@ const tailsDataSlice = createSlice({
     //define possible actions
     // Tail Actions ////////////////////////////////////
     addNewTail(state) {
-      state.tailsData.push(newTailGenerator());
+      state.tailsData.push(newTailTemplate());
     },
     removeTale(state, action) {
       const newTailData = state.tailsData.filter(
@@ -139,7 +95,7 @@ const tailsDataSlice = createSlice({
       const tailIndex = state.tailsData.findIndex((tail) => {
         return tail.id === action.payload;
       });
-      state.tailsData[tailIndex].cardsData.push(newCardTemplate);
+      state.tailsData[tailIndex].cardsData.push(newCardTemplate());
     },
     deleteCard(state, action) {
       const tailIndex = state.tailsData.findIndex((tail) => {
@@ -175,14 +131,58 @@ const tailsDataSlice = createSlice({
           return card.cardID === action.payload.cardID;
         }
       );
+      let lastIndex = 0;
+      try {
+        lastIndex =
+          state.tailsData[tailIndex].cardsData[cardIndex].TodosData.slice(-1)[0]
+            .index;
+      } catch (e) {
+        lastIndex = 0;
+      }
       state.tailsData[tailIndex].cardsData[cardIndex].TodosData.push(
-        createNewItemTemplate(action.payload.todoItem)
+        NewItemTemplate(action.payload.todoItem, ++lastIndex)
       );
     },
-    // tailCRUD()
-    // CardCRUD()
-    // NewTodo()
-    // TodoCRUD()
+    ///
+    removeTodo(state, action) {
+      const tailIndex = state.tailsData.findIndex((tail) => {
+        return tail.id === action.payload.tailID;
+      });
+      const cardIndex = state.tailsData[tailIndex].cardsData.findIndex(
+        (card) => {
+          return card.cardID === action.payload.cardID;
+        }
+      );
+      const newTodos = state.tailsData[tailIndex].cardsData[
+        cardIndex
+      ].TodosData.filter((todo) => {
+        return todo.index !== action.payload.index;
+      });
+      state.tailsData[tailIndex].cardsData[cardIndex].TodosData = newTodos;
+    },
+    ///
+    toggleDone(state, action) {
+      const tailIndex = state.tailsData.findIndex((tail) => {
+        return tail.id === action.payload.tailID;
+      });
+      const cardIndex = state.tailsData[tailIndex].cardsData.findIndex(
+        (card) => {
+          return card.cardID === action.payload.cardID;
+        }
+      );
+      const todoIndex = state.tailsData[tailIndex].cardsData[
+        cardIndex
+      ].TodosData.findIndex((todo) => {
+        return todo.index === action.payload.index;
+      });
+
+      state.tailsData[tailIndex].cardsData[cardIndex].TodosData[
+        todoIndex
+      ].done =
+        !state.tailsData[tailIndex].cardsData[cardIndex].TodosData[todoIndex]
+          .done;
+    },
+    ///
   },
 });
 //exporting reducer actions (which will be imported into store) to execute them in the components
@@ -192,7 +192,7 @@ export default tailsDataSlice.reducer;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let lastPaletteIndex = -1;
-function newTailGenerator() {
+function newTailTemplate() {
   lastPaletteIndex++;
   if (lastPaletteIndex === palette.length) {
     lastPaletteIndex = 0;
@@ -204,14 +204,18 @@ function newTailGenerator() {
     cardsData: [],
   };
 }
-const newCardTemplate = {
-  cardID: Math.random().toString(36).slice(2, 9),
-  cardName: "New Card",
-  TodosData: [],
-};
-
-function createNewItemTemplate(text) {
+function newCardTemplate() {
   return {
+    cardID: Math.random().toString(36).slice(2, 9),
+    cardName: "New Card",
+    TodosData: [],
+  };
+}
+
+function NewItemTemplate(text, index) {
+  console.log(index);
+  return {
+    index,
     todoTitle: text,
     done: false,
   };

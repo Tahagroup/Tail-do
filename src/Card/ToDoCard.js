@@ -71,7 +71,7 @@ function ToDoCard(props) {
       elevation={5}
       sx={{
         m: "20px",
-        // minWidth: "250px",
+        minWidth: "250px",
       }}
     >
       <CardContent

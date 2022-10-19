@@ -19,7 +19,12 @@ function NewTail() {
         boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
       }}
     >
-      <Button variant="outlined" onClick={NewTailClickHandler} fullWidth>
+      <Button
+        variant="outlined"
+        onClick={NewTailClickHandler}
+        fullWidth
+        color="success"
+      >
         + New Tail
       </Button>
     </Box>

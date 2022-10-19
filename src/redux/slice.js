@@ -10,7 +10,7 @@ const initialState = {
       theme: palette[3],
       cardsData: [
         {
-          cardID: "first",
+          cardID: "aa",
           cardName: "Monday",
           TodosData: [
             { todoTitle: "Do the laundry", done: false, index: 1 },
@@ -19,13 +19,13 @@ const initialState = {
           ],
         },
         {
-          cardID: "first",
+          cardID: "ab",
           cardName: "Tuesday",
           TodosData: [
             { todoTitle: "Go To Work", done: true, index: 1 },
             { todoTitle: "Take a Shower", done: true, index: 2 },
-            { todoTitle: "Buy Groceries", done: false, index: 2 },
-            { todoTitle: "18:00 => Meet Friends", done: false, index: 3 },
+            { todoTitle: "Buy Groceries", done: false, index: 3 },
+            { todoTitle: "18:00 => Meet Friends", done: false, index: 4 },
           ],
         },
       ],
@@ -41,7 +41,7 @@ const initialState = {
           TodosData: [
             { todoTitle: "Learn TypeScript", done: false, index: 1 },
             { todoTitle: "Improve ReactJS Skills", done: false, index: 2 },
-            { todoTitle: "Improve Family Life", done: true, index: 3 },
+            { todoTitle: "Finish The Book", done: true, index: 3 },
           ],
         },
       ],
@@ -175,7 +175,12 @@ const tailsDataSlice = createSlice({
       ].TodosData.findIndex((todo) => {
         return todo.index === action.payload.index;
       });
-
+      console.log(tailIndex, cardIndex, todoIndex);
+      // console.log(
+      //   JSON.stringify(
+      //     state.tailsData[tailIndex].cardsData[cardIndex].TodosData[todoIndex]
+      //   )
+      // );
       state.tailsData[tailIndex].cardsData[cardIndex].TodosData[
         todoIndex
       ].done =

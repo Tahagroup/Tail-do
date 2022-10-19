@@ -65,16 +65,24 @@ function CardToDoItem(props) {
     <ListItem
       key={0}
       secondaryAction={showOptions ? showOptionsComps : noShowOptionsComps}
-      disablePadding
+      // disablePadding
+      divider
     >
       <ListItemText
         primary={props.todoData.todoTitle}
-        sx={props.todoData.done ? { textDecoration: "line-through" } : {}}
+        primaryTypographyProps={{
+          overflow: "hidden",
+          textOverflow: "clip",
+          // mr: "20px",
+          width: "90%",
+        }}
+        secondary={" "} //add between-item space
+        sx={
+          props.todoData.done
+            ? { textDecoration: "line-through" }
+            : { overflow: "hidden", textOverflow: "clip" }
+        }
       />
-      {/* <ListItemText
-        secondary={`${props.todoData.done}`}
-        // sx={selected}
-      /> */}
     </ListItem>
   );
 }

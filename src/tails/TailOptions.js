@@ -8,17 +8,25 @@ import { useDispatch } from "react-redux";
 import { reducerActions } from "../redux/slice";
 import { GithubPicker } from "react-color";
 import { colorToPalette, palette } from "../utilities/palette";
+import DeleteDialog from "../dialoges/DeleteDialog";
 
 function TailOptions(props) {
   const [isEditingName, setisEditingName] = useState(false);
   const [isEditingColor, setIsEditingColor] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const inputRef = useRef("");
-
   const dispatch = useDispatch();
-
-  function deleteClickHandler(id) {
-    dispatch(reducerActions.removeTale(id));
+  ////////////////////////////////////////////////////////////
+  function deleteClickHandler() {
+    setIsDialogOpen(true);
   }
+  function deleteConfirmed() {
+    dispatch(reducerActions.removeTale(props.tailInfo.tailID));
+  }
+  function handleDialogClose() {
+    setIsDialogOpen(false);
+  }
+  ///
   function editClickHandler(id) {
     if (isEditingName) {
       dispatch(
@@ -44,7 +52,7 @@ function TailOptions(props) {
 
     // setIsEditingColor(false);
   }
-  const paletteColors = palette.map((colorObj) => colorObj.bgColor);
+  // return ////////////////////////////////////////////////////////////////
   return (
     <Box
       p={2}
@@ -58,9 +66,14 @@ function TailOptions(props) {
       }}
     >
       {/* Available Options: */}
-      <IconButton onClick={() => deleteClickHandler(props.tailInfo.tailID)}>
+      <IconButton onClick={() => deleteClickHandler()}>
         <DeleteTwoToneIcon />
       </IconButton>
+      <DeleteDialog
+        isOpen={isDialogOpen}
+        handleDialogClose={handleDialogClose}
+        deleteConfirmed={deleteConfirmed}
+      />
       <IconButton onClick={paletteClickHandler}>
         {!isEditingColor && <PaletteTwoToneIcon />}
       </IconButton>
@@ -75,7 +88,7 @@ function TailOptions(props) {
           }}
         >
           <GithubPicker
-            colors={[...paletteColors]}
+            colors={[...palette.map((colorObj) => colorObj.bgColor)]}
             triangle={"hide"}
             onChange={paletteChangeHandler}
             // style={{

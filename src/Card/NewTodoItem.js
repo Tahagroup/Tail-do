@@ -42,6 +42,12 @@ function NewTodoItem(props) {
           label="Enter Todo's Text:"
           inputRef={InputRef}
           autoFocus
+          sx={{
+            mt: "5px",
+          }}
+          InputProps={{
+            disableUnderline: true,
+          }}
           onBlur={newTodoLoseFocusHandler}
           onKeyDown={onEnterPressHandler}
         />
@@ -52,6 +58,7 @@ function NewTodoItem(props) {
           size="small"
           sx={{
             textTransform: "none",
+            mt: "5px",
             // margin: "auto",
           }}
         >

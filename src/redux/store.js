@@ -1,14 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
-import TailsSlice from "./slice";
 // also import other slices if available
+import TailsSlice from "./slice";
 
-// create the store(initial setup of redux which will be passed to top level component to give every child component access redux data)
-const store = configureStore({
-  // add all slices, they will be merged
-  reducer: {
-    // tailsData is name of choice
-    tailsDataSlice: TailsSlice,
-    // , slice2: mySlice.reducer
-  },
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
+import hardSet from "redux-persist/lib/stateReconciler/hardSet";
+
+const persistConfig = {
+  key: "root",
+  storage, // use localStorage not session or...
+};
+const persistedReducer = persistReducer(persistConfig, TailsSlice);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [thunk],
+  // whitelist: ["reducer"],
+  stateReconciler: hardSet, // state reconciler: how incoming state from storage replaces initial state
 });
-export default store;
+export const persistor = persistStore(store);

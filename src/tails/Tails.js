@@ -4,7 +4,7 @@ import NewTail from "./NewTail";
 import Tail from "./Tail";
 
 function Tails() {
-  const tailData = useSelector((state) => state.tailsDataSlice.tailsData);
+  const tailData = useSelector((state) => state.tailsData);
 
   return (
     <>

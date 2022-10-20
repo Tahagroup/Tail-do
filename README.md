@@ -13,6 +13,7 @@ A react Todo app with 3 levels of grouping(Tail, Card & Todo).
 
 ### Here's how it will look:
 
+![tail-do](https://s6.uupload.ir/files/taildo_zsmr.png)
 
 
 

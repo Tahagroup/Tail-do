@@ -3,7 +3,12 @@ import TailOptions from "./TailOptions";
 import { Box } from "@mui/material";
 import TailCards from "../Card/TailCards";
 
-function Tail(props) {
+interface TailProps {
+  theme: Theme;
+  tailInfo: { tailName: string; tailID: string };
+  cardsData: Card[];
+}
+function Tail(props: TailProps) {
   return (
     <Box
       maxHeight={600}

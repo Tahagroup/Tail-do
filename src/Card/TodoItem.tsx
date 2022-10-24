@@ -5,11 +5,18 @@ import CloseTwoToneIcon from "@mui/icons-material/CloseTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import CheckBoxTwoToneIcon from "@mui/icons-material/CheckBoxTwoTone";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import { useDispatch } from "react-redux";
 import { reducerActions } from "../redux/slice";
-function CardToDoItem(props) {
+import { useAppDispatch } from "../hooks/useAppDispatch";
+
+interface CardToDoItemProps {
+  tailID: string;
+  cardID: string;
+  index: number;
+  todoData: TodoItem;
+}
+function CardToDoItem(props: CardToDoItemProps) {
   const [showOptions, setshowOptions] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   function todoOptionsClickHandler() {
     setshowOptions(true);
   }

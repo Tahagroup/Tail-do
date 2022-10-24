@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import NewTail from "./NewTail";
 import Tail from "./Tail";
 
 function Tails() {
-  const tailData = useSelector((state) => state.tailsData);
+  const tailData = useSelector((state: RootState) => state.tailsData);
 
   return (
     <>

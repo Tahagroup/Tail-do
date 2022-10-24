@@ -4,18 +4,22 @@ import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import PaletteTwoToneIcon from "@mui/icons-material/PaletteTwoTone";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
-import { useDispatch } from "react-redux";
 import { reducerActions } from "../redux/slice";
-import { GithubPicker } from "react-color";
+import { ColorResult, GithubPicker } from "react-color";
 import { colorToPalette, palette } from "../utilities/palette";
 import DeleteDialog from "../dialoges/DeleteDialog";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
-function TailOptions(props) {
+interface TailOptionsProps {
+  tailInfo: { tailName: string; tailID: string };
+  theme: Theme;
+}
+function TailOptions(props: TailOptionsProps) {
   const [isEditingName, setisEditingName] = useState(false);
   const [isEditingColor, setIsEditingColor] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const inputRef = useRef("");
-  const dispatch = useDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
   ////////////////////////////////////////////////////////////
   function deleteClickHandler() {
     setIsDialogOpen(true);
@@ -27,20 +31,20 @@ function TailOptions(props) {
     setIsDialogOpen(false);
   }
   ///
-  function editClickHandler(id) {
+  function editClickHandler(id: string) {
     if (isEditingName) {
       dispatch(
-        reducerActions.editTale({ id: id, newName: inputRef.current.value })
+        reducerActions.editTale({ id: id, newName: inputRef.current!.value })
       );
     }
     setisEditingName((prev) => {
       return !prev;
     });
   }
-  function paletteClickHandler(id, newTheme) {
+  function paletteClickHandler() {
     setIsEditingColor(true);
   }
-  function paletteChangeHandler(color, event) {
+  function paletteChangeHandler(color: ColorResult) {
     // change theme
     const palette = colorToPalette(color.hex);
     dispatch(

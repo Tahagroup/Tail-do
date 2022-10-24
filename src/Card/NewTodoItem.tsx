@@ -1,18 +1,23 @@
 import { Button, ListItem, TextField } from "@mui/material";
-import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { FocusEvent, KeyboardEvent, useRef, useState } from "react";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 import { reducerActions } from "../redux/slice";
 
-function NewTodoItem(props) {
+interface NewTodoItemProps {
+  tailID: string;
+  cardID: string;
+}
+
+function NewTodoItem(props: NewTodoItemProps) {
   const [isAdding, setIsAdding] = useState(false);
-  const InputRef = useRef();
-  const dispatch = useDispatch();
+  const InputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
   function newTodoClickHandler() {
     setIsAdding(true);
   }
   function addNewItemDispatcher() {
-    const todoText = InputRef.current.value;
+    const todoText = InputRef.current!.value;
     if (todoText !== "") {
       dispatch(
         reducerActions.addNewItem({
@@ -24,10 +29,10 @@ function NewTodoItem(props) {
     }
     setIsAdding(false);
   }
-  function newTodoLoseFocusHandler(event) {
+  function newTodoLoseFocusHandler(event: FocusEvent<HTMLInputElement>) {
     addNewItemDispatcher();
   }
-  function onEnterPressHandler(event) {
+  function onEnterPressHandler(event: KeyboardEvent<HTMLImageElement>) {
     if (event.key === "Enter") {
       addNewItemDispatcher();
     }

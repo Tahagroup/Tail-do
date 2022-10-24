@@ -1,7 +1,12 @@
 import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import React from "react";
 
-function DeleteDialog(props) {
+interface DeleteDialogProps {
+  isOpen: boolean;
+  handleDialogClose: () => void;
+  deleteConfirmed: () => void;
+}
+function DeleteDialog(props: DeleteDialogProps) {
   return (
     <div>
       <Dialog open={props.isOpen}>

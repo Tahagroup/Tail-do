@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { FocusEvent, KeyboardEvent, useRef, useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,14 +11,21 @@ import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import NewTodoItem from "./NewTodoItem";
 import TodoItem from "./TodoItem";
 import { reducerActions } from "../redux/slice";
-import { useDispatch } from "react-redux";
 import DeleteDialog from "../dialoges/DeleteDialog";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
-function ToDoCard(props) {
-  const InputRef = useRef();
-  const dispatch = useDispatch();
+interface ToDoCardProps {
+  card: Card;
+  tailID: string;
+  cardID: string;
+  theme: Theme;
+}
+
+function ToDoCard(props: ToDoCardProps) {
+  const InputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditing, setisEditing] = useState(false);
 
@@ -36,7 +43,7 @@ function ToDoCard(props) {
     changeNameDispatcher();
   }
   function changeNameDispatcher() {
-    const newName = InputRef.current.value;
+    const newName = InputRef.current!.value;
     if (newName !== "" && newName !== props.card.cardName) {
       dispatch(
         reducerActions.changeCardName({
@@ -48,10 +55,10 @@ function ToDoCard(props) {
     }
     setisEditing(false);
   }
-  function cardNameLoseFocusHandler(event) {
+  function cardNameLoseFocusHandler(event: FocusEvent<HTMLInputElement>) {
     setisEditing(false);
   }
-  function EnterPressHandler(event) {
+  function EnterPressHandler(event: KeyboardEvent) {
     if (event.key === "Enter") {
       changeNameDispatcher();
     }
@@ -123,7 +130,7 @@ function ToDoCard(props) {
           dense
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >
-          {props.card.TodosData.map((todo, index) => {
+          {props.card.TodosData.map((todo: TodoItem, index: number) => {
             return (
               <TodoItem
                 todoData={todo}

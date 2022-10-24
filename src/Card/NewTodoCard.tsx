@@ -1,11 +1,14 @@
 import { Box, IconButton } from "@mui/material";
 import React from "react";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
-import { useDispatch } from "react-redux";
 import { reducerActions } from "../redux/slice";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
-function NewTodoCard(props) {
-  const dispatch = useDispatch();
+interface NewTodoCardProps {
+  tailID: string;
+}
+function NewTodoCard(props: NewTodoCardProps) {
+  const dispatch = useAppDispatch();
   function addNewCardHandler() {
     dispatch(reducerActions.addNewCard(props.tailID));
   }

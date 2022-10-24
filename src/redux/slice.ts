@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { palette } from "../utilities/palette";
-
-const initialState = {
+interface tailType {
+  tailsData: Tail[];
+}
+const initialState: tailType = {
   //initial state
   tailsData: [
     {
@@ -175,12 +177,6 @@ const tailsDataSlice = createSlice({
       ].TodosData.findIndex((todo) => {
         return todo.index === action.payload.index;
       });
-      console.log(tailIndex, cardIndex, todoIndex);
-      // console.log(
-      //   JSON.stringify(
-      //     state.tailsData[tailIndex].cardsData[cardIndex].TodosData[todoIndex]
-      //   )
-      // );
       state.tailsData[tailIndex].cardsData[cardIndex].TodosData[
         todoIndex
       ].done =
@@ -217,8 +213,7 @@ function newCardTemplate() {
   };
 }
 
-function NewItemTemplate(text, index) {
-  console.log(index);
+function NewItemTemplate(text: string, index: number) {
   return {
     index,
     todoTitle: text,

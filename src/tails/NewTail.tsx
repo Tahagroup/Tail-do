@@ -1,10 +1,10 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 import { reducerActions } from "../redux/slice";
 
 function NewTail() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function NewTailClickHandler() {
     dispatch(reducerActions.addNewTail());

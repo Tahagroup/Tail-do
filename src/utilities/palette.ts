@@ -37,7 +37,7 @@ const palette = [
   },
 ];
 
-function colorToPalette(color) {
+function colorToPalette(color: string) {
   return palette.find((paletteItem) => {
     return paletteItem.bgColor === color;
   });

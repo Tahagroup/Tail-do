@@ -5,7 +5,7 @@ import Tails from "./tails/Tails";
 function App() {
   return (
     <>
-      {/* <Header /> */}
+      {/* <Header />  // A header can be implemented*/}
       <Tails />
     </>
   );

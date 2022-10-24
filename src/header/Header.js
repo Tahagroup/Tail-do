@@ -5,7 +5,7 @@ function Header() {
   return (
     <AppBar position="relative">
       <Toolbar>
-        <Typography>logo + menu items</Typography>
+        <Typography>Header implemention goes here...</Typography>
       </Toolbar>
     </AppBar>
   );

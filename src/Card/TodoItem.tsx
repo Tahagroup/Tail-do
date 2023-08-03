@@ -6,7 +6,7 @@ import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import CheckBoxTwoToneIcon from "@mui/icons-material/CheckBoxTwoTone";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { reducerActions } from "../redux/slice";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppDispatch } from "../redux/store";
 
 interface CardToDoItemProps {
   tailID: string;

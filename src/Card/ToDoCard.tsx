@@ -14,7 +14,7 @@ import { reducerActions } from "../redux/slice";
 import DeleteDialog from "../dialoges/DeleteDialog";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppDispatch } from "../redux/store";
 
 interface ToDoCardProps {
   card: Card;
@@ -23,7 +23,7 @@ interface ToDoCardProps {
   theme: Theme;
 }
 
-function ToDoCard(props: ToDoCardProps) {
+function TodoCard(props: ToDoCardProps) {
   const InputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -133,10 +133,10 @@ function ToDoCard(props: ToDoCardProps) {
           {props.card.TodosData.map((todo: TodoItem, index: number) => {
             return (
               <TodoItem
+                key={todo.index}
                 todoData={todo}
                 tailID={props.tailID}
                 cardID={props.card.cardID}
-                key={index}
                 index={index + 1}
               />
             );
@@ -148,4 +148,4 @@ function ToDoCard(props: ToDoCardProps) {
   );
 }
 
-export default ToDoCard;
+export default TodoCard;

@@ -1,6 +1,6 @@
 import { Button, ListItem, TextField } from "@mui/material";
 import { FocusEvent, KeyboardEvent, useRef, useState } from "react";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppDispatch } from "../redux/store";
 import { reducerActions } from "../redux/slice";
 
 interface NewTodoItemProps {

@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppDispatch } from "../redux/store";
 import { reducerActions } from "../redux/slice";
 
 function NewTail() {

@@ -8,7 +8,7 @@ import { reducerActions } from "../redux/slice";
 import { ColorResult, GithubPicker } from "react-color";
 import { colorToPalette, palette } from "../utilities/palette";
 import DeleteDialog from "../dialoges/DeleteDialog";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppDispatch } from "../redux/store";
 
 interface TailOptionsProps {
   tailInfo: { tailName: string; tailID: string };

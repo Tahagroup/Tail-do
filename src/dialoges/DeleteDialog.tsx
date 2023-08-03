@@ -11,7 +11,6 @@ function DeleteDialog(props: DeleteDialogProps) {
     <div>
       <Dialog open={props.isOpen}>
         <DialogTitle>Are you sure you want to delete?</DialogTitle>
-        {/* <DialogContent sx={{ display: "flex" }}>more text</DialogContent> */}
         <DialogActions>
           <Button
             variant="outlined"

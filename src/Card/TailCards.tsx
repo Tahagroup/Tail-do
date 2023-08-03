@@ -1,7 +1,6 @@
 import React from "react";
 import NewTodoCard from "./NewTodoCard";
-import ToDoCard from "./ToDoCard";
-
+import TodoCard from "./TodoCard";
 interface TailCardsProps {
   tailID: string;
   cardsData: Card[];
@@ -13,8 +12,8 @@ function TailCards(props: TailCardsProps) {
     <>
       {props.cardsData.map((card, index) => {
         return (
-          <ToDoCard
-            key={index}
+          <TodoCard
+            key={card.cardID}
             card={card}
             theme={props.theme}
             tailID={props.tailID}

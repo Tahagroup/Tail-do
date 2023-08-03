@@ -2,7 +2,7 @@ import { Box, IconButton } from "@mui/material";
 import React from "react";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { reducerActions } from "../redux/slice";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppDispatch } from "../redux/store";
 
 interface NewTodoCardProps {
   tailID: string;

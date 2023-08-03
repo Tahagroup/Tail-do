@@ -4,7 +4,6 @@ interface tailType {
   tailsData: Tail[];
 }
 const initialState: tailType = {
-  //initial state
   tailsData: [
     {
       id: "1",
@@ -66,11 +65,10 @@ const initialState: tailType = {
   ],
 };
 const tailsDataSlice = createSlice({
-  name: "Tails", //this is slice name to distinguish from other slices
+  name: "Tails",
   initialState,
   reducers: {
-    //define possible actions
-    // Tail Actions ////////////////////////////////////
+    // tail actions
     addNewTail(state) {
       state.tailsData.push(newTailTemplate());
     },
@@ -81,10 +79,10 @@ const tailsDataSlice = createSlice({
       state.tailsData = newTailData;
     },
     editTale(state, action) {
-      const tailToEdit = state.tailsData.findIndex((tail) => {
+      const tailToEdit = state.tailsData.find((tail) => {
         return tail.id === action.payload.id;
       });
-      state.tailsData[tailToEdit].tailName = action.payload.newName;
+      tailToEdit.tailName = action.payload.newName;
     },
     changeTaleTheme(state, action) {
       const tailToEdit = state.tailsData.findIndex((tail) => {
@@ -92,7 +90,7 @@ const tailsDataSlice = createSlice({
       });
       state.tailsData[tailToEdit].theme = action.payload.newTheme;
     },
-    // Card Actions ////////////////////////////////////
+    // card actions
     addNewCard(state, action) {
       const tailIndex = state.tailsData.findIndex((tail) => {
         return tail.id === action.payload;
@@ -123,7 +121,7 @@ const tailsDataSlice = createSlice({
         action.payload.newName;
     },
 
-    // Item Actions ////////////////////////////////////
+    // item actions
     addNewItem(state, action) {
       const tailIndex = state.tailsData.findIndex((tail) => {
         return tail.id === action.payload.tailID;
@@ -145,7 +143,6 @@ const tailsDataSlice = createSlice({
         NewItemTemplate(action.payload.todoItem, ++lastIndex)
       );
     },
-    ///
     removeTodo(state, action) {
       const tailIndex = state.tailsData.findIndex((tail) => {
         return tail.id === action.payload.tailID;
@@ -162,7 +159,6 @@ const tailsDataSlice = createSlice({
       });
       state.tailsData[tailIndex].cardsData[cardIndex].TodosData = newTodos;
     },
-    ///
     toggleDone(state, action) {
       const tailIndex = state.tailsData.findIndex((tail) => {
         return tail.id === action.payload.tailID;
@@ -183,15 +179,13 @@ const tailsDataSlice = createSlice({
         !state.tailsData[tailIndex].cardsData[cardIndex].TodosData[todoIndex]
           .done;
     },
-    ///
   },
 });
-//exporting reducer actions (which will be imported into store) to execute them in the components
 export const reducerActions = tailsDataSlice.actions;
-//exporting whole reducer:
 export default tailsDataSlice.reducer;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// new Templates
+
 let lastPaletteIndex = -1;
 function newTailTemplate() {
   lastPaletteIndex++;
@@ -205,6 +199,7 @@ function newTailTemplate() {
     cardsData: [],
   };
 }
+
 function newCardTemplate() {
   return {
     cardID: Math.random().toString(36).slice(2, 9),

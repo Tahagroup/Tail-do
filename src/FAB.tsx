@@ -12,16 +12,11 @@ function FAB() {
     <Fab
       text="Github"
       mainButtonStyles={{ backgroundColor: "#000" }}
-      //   actionButtonStyles={actionButtonStyles}
       style={{ bottom: 12, right: 12 }}
-      icon={<GitHubIcon fontSize="large" />} // Main button component
-      event={"click"} // default:'hover' or 'click'
-      alwaysShowTitle={false} // to always show hints beside icons
-      //   onClick={} // someFunction For The Main Button in addition to show/hide options
+      icon={<GitHubIcon fontSize="large" />}
+      event={"click"}
+      alwaysShowTitle={false}
     >
-      {/* The Action components are the "buttons" that appear when the Fab is open.
-        You can use the out-of-the-box Action component or you can use a custom
-        component of any type and style. */}
       <Action
         text="Implemention in JavaScript"
         onClick={() => openInNewTab("https://github.com/Tahagroup/Tail-do")}
